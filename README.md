@@ -6,20 +6,31 @@ Team Members:
 - Eric Green
 
   
-Goal: Predict future stock prices using historical stock market data and machine 
+Goal: Predict whether a stock price will be up or down in the future using historical stock market data and machine 
 learning.
 
-
 Summary:
-- API = Yahoo Finance
+- Data Source: Yahoo Finance
 - Database = Spark
-- Model = Neural Network LSTM (Kera’s Bi-Directional Model)
+- Model = RandomForestClassifier
 
-- 
-Using the Yahoo Finance API, we will import historical stock data for a single stock 
-into the Spark database. Using Pandas, we will then clean the data and prepare for 
-use in training a neural network model to predict the chosen stock’s future prices. 
-After some preliminary research, we decided to use Kera’s Bi-Directional LSTM 
-Model as it is the most common model used for stock market time-series data. 
-Because stock market data is commonly viewed in line-chart form, we also plan to 
-include some line-charts to better visualize the price predictions. 
+1. Downloaded weekly historical stock price data for SPY & VIX from Yahoo Finance in the form of CSVs.
+2. Imported those CSVs into a Spark database.
+3. Converted the Spark DataFrames into Pandas DataFrames for easier cleaning.
+4. Merged, cleaned, and prepped the data to be used in our RandomForestClassifier model.
+5. Trained the model and got a precision accuracy score of 0.57205...
+6. Added Lag & SMA predictor columns to increase model accuracy score to 0.58602...
+7. Imported another CSV file with historical price data for the 10-year treasury bond (TNX).
+8. Prepped the TNX data and then merged it with the existing DataFrame.
+9. Retrained the new model with the TNX data and increased the accuracy score to 0.59493...
+
+Sources:
+https://www.geeksforgeeks.org/python-pandas-dataframe-reset_index/?ref=lbp
+https://www.geeksforgeeks.org/how-to-calculate-moving-averages-in-python/
+https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+https://www.w3schools.com/python/pandas/ref_df_floordiv.asp#:~:text=The%20floordiv()%20method%20divides,the%20values%20of%20the%20DataFrame.
+https://saturncloud.io/blog/converting-a-column-to-date-format-in-pandas-dataframe/#:~:text=Method%201%3A%20Using%20the%20to_datetime,to%20a%20standard%20datetime%20format.
+https://www.freecodecamp.org/news/how-to-rename-a-column-in-pandas/
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
+https://www.youtube.com/watch?v=1O_BenficgE&list=LL&index=11
+https://www.youtube.com/watch?v=CbTU92pbDKw&list=LL&index=10
